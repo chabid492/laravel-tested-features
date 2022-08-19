@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
-Route::get('test',[TestController::class,'index']);
+//testing solutions routes
+Route::get('/fetchCount',[TestController::class,'fetchCountMultipleStatus']);
+Route::get('/getLastRec',[TestController::class,'getLastRecFromRelatedModel']);
+Route::get('/getPosts',[TestController::class,'getPosts']);
 
 Route::get('/greet', function() {
     return MyFacade::greet2();
