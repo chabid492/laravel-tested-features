@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+    //optimize queries from N+1 to N, Optimize storage
     public function index(){
         $users=User::query()
             ->select('id','name','email','created_at')
@@ -20,7 +21,8 @@ class TestController extends Controller
         print_r($users->toArray());
     }
 
-    /*public function index(){
+    //optimize queries, and Ram consuming
+    public function getPosts(){
         $posts=Post::query()
             ->select('id','user_id','title','created_at')
             ->with('user:id,name')
@@ -30,5 +32,5 @@ class TestController extends Controller
                $post->created_at->year;
             });
         print_r($posts->toArray());
-    }*/
+    }
 }
