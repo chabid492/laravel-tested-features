@@ -56,6 +56,7 @@ class User extends Authenticatable
         return $this->hasMany(Login::class);
     }
 
+    //only fetch single property from related table. //solution last record from related table
     public function scopeWithLastLoginAt($query){
         $query->addSelect([
             'last_login_at'=>Login::select('created_at')
@@ -64,4 +65,5 @@ class User extends Authenticatable
                 ->take(1)
         ]);
     }
+
 }
