@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
+
     //solution 3
     //fetch and count multiple status in single query, very important
     public function fetchCountMultipleStatus(){

@@ -50,6 +50,7 @@ class UserSeeder extends Seeder
 
                 for ($l=0; $l<50; $l++){
                     $comment=new Comment();
+                    $comment->user_id=$user->id;
                     $comment->post_id=$post->id;
                     $comment->review=Str::random(20);
                     $comment->status=$statuses[array_rand($statuses,1)];
