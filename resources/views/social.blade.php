@@ -31,8 +31,8 @@
             data: { '_token':token },
             success :function(res){
                 console.log(res);
-                console.log(res.data);
-                //window.location.href = res.data;
+                //console.log(res.data);
+                window.location.href = res;
             }
         });
     });
