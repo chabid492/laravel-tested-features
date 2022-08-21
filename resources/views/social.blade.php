@@ -26,7 +26,7 @@
         e.preventDefault();
         var token = "{{ csrf_token() }}";
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "{{ url('social/google') }}",
             data: { '_token':token },
             success :function(res){
