@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Profila\SocialLoginController;
+
+//social login
+Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
+Route::get('auth/{google}/callback', [SocialLoginController::class, 'handleGoogleCallback']);
 
 //testing solutions routes
 Route::get('/searchMultipleScope',function (){
