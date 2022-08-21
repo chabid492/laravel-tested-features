@@ -30,11 +30,16 @@ class Post extends Model
             $query->where('title','like',$term)
                 ->orWhere('desc','like',$term)
                 //->orWhere('users.name','like',$term);
-                ->orWhereIn('user_id',function ($query) use ($term){
+                /*->orWhereIn('user_id',function ($query) use ($term){
                     $query->select('id')
                         ->from('users')
                         ->where('name','like',$term);
-                });
+                });*/
+
+                ->orWhereIn('user_id',User::query()
+                    ->where('name','like',$term)
+                    ->pluck('id')
+                );
         });
     }
 }
