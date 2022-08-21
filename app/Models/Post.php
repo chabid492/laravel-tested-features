@@ -19,15 +19,17 @@ class Post extends Model
 
     //solution 4, search from multiple scopes
     public function scopeSearch($query, string $term = null){
+
+        //for index search on related user table
+        $query->join('users','users.id','posts.user_id');
+
         //collect(explode(' ',$term))->filter()->each(function ($term) use ($query){
         collect(str_getcsv($term,' ','"'))->filter()->each(function ($term) use ($query){
             //$term='%'.$term.'%';
             $term=$term.'%'; //remove wildcard % if use index on sql column
             $query->where('title','like',$term)
                 ->orWhere('desc','like',$term)
-                ->orWhereHas('user',function ($query) use ($term){
-                    $query->where('name','like',$term);
-                });
+                ->orWhere('users.name','like',$term);
         });
     }
 }

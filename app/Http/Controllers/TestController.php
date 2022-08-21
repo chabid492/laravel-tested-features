@@ -15,7 +15,7 @@ class TestController extends Controller
     //solution 4, search from multiple column and from multiple tables
     public function searchMultipleScopeSearch(Request $request){
         $posts=Post::query()
-            ->select('id','title','desc','user_id')
+            //->select('id','title','desc','user_id')
             ->search(request('search'))
             ->with('user')
             ->get();
