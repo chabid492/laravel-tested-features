@@ -21,7 +21,7 @@ class Post extends Model
     public function scopeSearch($query, string $term = null){
 
         //for index search on related user table
-        $query->join('users','users.id','posts.user_id');
+        //$query->join('users','users.id','posts.user_id');
 
         //collect(explode(' ',$term))->filter()->each(function ($term) use ($query){
         collect(str_getcsv($term,' ','"'))->filter()->each(function ($term) use ($query){
@@ -29,7 +29,12 @@ class Post extends Model
             $term=$term.'%'; //remove wildcard % if use index on sql column
             $query->where('title','like',$term)
                 ->orWhere('desc','like',$term)
-                ->orWhere('users.name','like',$term);
+                //->orWhere('users.name','like',$term);
+                ->orWhereIn('user_id',function ($query) use ($term){
+                    $query->select('id')
+                        ->from('users')
+                        ->where('name','like',$term);
+                });
         });
     }
 }
