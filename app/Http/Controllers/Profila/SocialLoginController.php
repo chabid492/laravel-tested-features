@@ -17,6 +17,7 @@ class SocialLoginController extends Controller
      * @return void
      */
 
+
     public function redirect($provider)
     {
         return \response(Socialite::driver('google')->redirect()->getTargetUrl());

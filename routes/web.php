@@ -6,6 +6,10 @@ use App\Http\Controllers\Profila\SocialLoginController;
 
 
 //stateless login
+Route::get('socialLogin',function (){
+    return view('social');
+});
+
 Route::post('social/{provider}', [SocialLoginController::class, 'redirect']);
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback']);
 
