@@ -16,7 +16,8 @@ class TestController extends Controller
     public function searchMultipleScopeSearch(Request $request){
         $posts=Post::query()
             //->select('id','title','desc','user_id')
-            ->search(request('search'))
+            //->search(request('search')) //solution 4
+            ->searchNew(request('search')) //solution 5
             ->with('user')
             ->get();
 

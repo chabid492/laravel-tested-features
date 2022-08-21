@@ -17,6 +17,33 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+    //solution 5, search from multiple scopes
+    public function scopeSearchNew($query, string $term = null){
+        //desc
+        //wherein
+            //derived table
+                //find post by title and desc
+                //union
+                //find related user
+
+        $query->whereIn('id',function ($query) use ($term){
+            $query->select('id')
+                ->from(function ($query) use ($term){
+                    $query->select('id')
+                        ->from('posts')
+                        ->where('title','like',$term)
+                        ->orWhere('desc','like',$term)
+                        ->union(
+                            $query->newQuery()
+                            ->select('user_id')
+                            ->from('posts')
+                            ->join('users','users.id','=','posts.user_id')
+                            ->where('users.name','like',$term)
+                        );
+                },'matches');
+        });
+    }
+
     //solution 4, search from multiple scopes
     public function scopeSearch($query, string $term = null){
 
