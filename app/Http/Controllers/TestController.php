@@ -12,10 +12,21 @@ use Illuminate\Support\Facades\DB;
 class TestController extends Controller
 {
 
+    //solution 4, search from multiple column and from multiple tables
+    public function searchMultipleScopeSearch(Request $request){
+        $posts=Post::query()
+            ->select('id','title','desc','user_id')
+            ->search(request('search'))
+            ->with('user')
+            ->get();
+
+        //dd($posts);
+        return view('test.list',compact('posts'));
+    }
+
     //solution 3
     //fetch and count multiple status in single query, very important
     public function fetchCountMultipleStatus(){
-
         $com=Comment::toBase()
             ->selectRaw("COUNT(CASE WHEN status='pending' THEN 1 END) as total_pending")
             ->selectRaw("COUNT(CASE WHEN status='viewed' THEN 1 END) as total_viewed")

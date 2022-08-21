@@ -16,4 +16,18 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
+
+    //solution 4, search from multiple scopes
+    public function scopeSearch($query, string $term = null){
+        //collect(explode(' ',$term))->filter()->each(function ($term) use ($query){
+        collect(str_getcsv($term,' ','"'))->filter()->each(function ($term) use ($query){
+            //$term='%'.$term.'%';
+            $term=$term.'%'; //remove wildcard % if use index on sql column
+            $query->where('title','like',$term)
+                ->orWhere('desc','like',$term)
+                ->orWhereHas('user',function ($query) use ($term){
+                    $query->where('name','like',$term);
+                });
+        });
+    }
 }
