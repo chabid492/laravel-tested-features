@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Profila\SocialLoginController;
 
+
+//stateless login
+Route::post('social/{provider}', [SocialLoginController::class, 'redirect']);
+Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback']);
+
 //social login
 Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
-Route::get('auth/{google}/callback', [SocialLoginController::class, 'handleGoogleCallback']);
+//Route::get('auth/{google}/callback', [SocialLoginController::class, 'handleGoogleCallback']);
 
 //testing solutions routes
 Route::get('/searchMultipleScope',function (){
