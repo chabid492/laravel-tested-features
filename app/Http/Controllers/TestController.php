@@ -11,7 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
-    //make fast order by query one relation has one
+    //make fast order by query on has many and inverse
+    //also order by last login at user
+    public function userOrderByHasMany(){
+        $users=User::query()
+            ->orderByLastLogin()
+            ->paginate(10);
+        return view('users.list',compact('users'));
+    }
+
+    //make fast order by query one relation has one and inverse
     public function userOrderByHasOne(){
         $users=User::query()
             ->orderBy(Post::select('title')

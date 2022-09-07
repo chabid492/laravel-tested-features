@@ -19,6 +19,7 @@ Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
 
 //testing solutions routes
 
+Route::get('/userOrderByHasMany',[TestController::class,'userOrderByHasMany']);
 Route::get('/userOrderByHasOne',[TestController::class,'userOrderByHasOne']);
 Route::get('/userOrderBy',[TestController::class,'userOrderBy']);
 

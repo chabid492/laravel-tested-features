@@ -75,4 +75,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function scopeOrderByLastLogin($query){
+        $query->orderByDesc(Login::select('created_at')
+            ->whereColumn('user_id','users.id')
+            ->latest()
+            ->take(1)
+        );
+    }
 }
