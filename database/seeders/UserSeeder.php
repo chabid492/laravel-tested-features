@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             $user=new User();
             $user->name=Str::random(5);
             $user->email=strtolower(Str::random(5)).'@'.'gmail.com';
+            $user->city = Str::random(4);
             $user->password=Hash::make(12345678);
             $user->save();
 

@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
+    //solution fast order by query with compound index see users migrations
+    //Important: it is necessary that order by column order should match with migration index order
+    public function userOrderBy(){
+        $users=User::query()
+                ->select('id','name','email','created_at')
+                ->orderBy('name')
+                ->orderBy('city')
+                ->paginate(10);
+        return view('users.list',compact('users'));
+    }
 
     //solution 4, search from multiple column and from multiple tables
     public function searchMultipleScopeSearch(Request $request){
@@ -35,13 +45,13 @@ class TestController extends Controller
             ->first();
 
         print_r($com);
-        dd();
+        //dd();
 
-        $posts=Post::query()
+        /*$posts=Post::query()
                     ->select('id','title')
                     ->withCount('comments')
                     ->get();
-        print_r($posts);
+        print_r($posts);*/
     }
 
     //solution 2

@@ -18,6 +18,9 @@ Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
 //Route::get('auth/{google}/callback', [SocialLoginController::class, 'handleGoogleCallback']);
 
 //testing solutions routes
+
+Route::get('/userOrderBy',[TestController::class,'userOrderBy']);
+
 Route::get('/searchMultipleScope',function (){
     return view('test.posts');
 });
