@@ -49,6 +49,10 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
 
+    public function post(){
+        return $this->hasOne(Post::class);
+    }
+
     public function posts(){
         return $this->hasMany(Post::class);
     }

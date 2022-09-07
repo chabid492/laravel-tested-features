@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
+    //make fast order by query one relation has one
+    public function userOrderByHasOne(){
+        $users=User::query()
+            ->orderBy(Post::select('title')
+                ->whereColumn('posts.user_id','users.id')
+                //->whereColumn('posts.id','users.post_id') //for inverse has one
+                ->orderBy('title')
+                ->take(1)
+            )
+            ->with('post')
+            ->paginate(10);
+        return view('users.list',compact('users'));
+    }
+
     //solution fast order by query with compound index see users migrations
     //Important: it is necessary that order by column order should match with migration index order
     public function userOrderBy(){

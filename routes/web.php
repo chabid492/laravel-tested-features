@@ -19,6 +19,7 @@ Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
 
 //testing solutions routes
 
+Route::get('/userOrderByHasOne',[TestController::class,'userOrderByHasOne']);
 Route::get('/userOrderBy',[TestController::class,'userOrderBy']);
 
 Route::get('/searchMultipleScope',function (){
