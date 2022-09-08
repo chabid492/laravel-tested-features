@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\NotificationJob;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
@@ -39,15 +40,20 @@ class DemoCron extends Command
      *
      * @return int
      */
+
+    //php artisan schedule:work  //cmd for locally test
     public function handle()
     {
         Log::info("Cron is working fine!");
 
-        $user=new User();
+        NotificationJob::dispatch();
+        /*$user=new User();
         $user->name=Str::random(8);
         $user->email=Str::random(5).'@gmail.com';
         $user->password=Hash::make('12345678');
-        $user->save();
+        $user->save();*/
+
+
         /*
            Write your database logic we bellow:
            Item::create(['name'=>'hello new']);

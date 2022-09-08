@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Profila\SocialLoginController;
+use App\Http\Controllers\JobController\NotifyController;
 
+//testing jobs
+Route::get('/runjob', [NotifyController::class, 'index']);
 
 //stateless login
 Route::get('socialLogin',function (){
