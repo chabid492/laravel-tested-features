@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
+use Throwable;
 
 class NotificationJob implements ShouldQueue
 {
@@ -20,6 +21,16 @@ class NotificationJob implements ShouldQueue
      *
      * @return void
      */
+
+    public $tries = 1;
+
+    /**
+     * The number of seconds to wait before retrying the job.
+     *
+     * @var int
+     */
+    public $backoff = 3;
+
     public function __construct()
     {
         //
@@ -43,5 +54,28 @@ class NotificationJob implements ShouldQueue
     public function middleware()
     {
         return [(new WithoutOverlapping())->dontRelease()];
+    }
+
+    /**
+     * Determine the time at which the job should timeout.
+     *
+     * @return \DateTime
+     */
+    public function retryUntil()
+    {
+        return now()->addMinutes(1);
+    }
+
+    /**
+     * Handle a job failure.
+     *
+     * @param  \Throwable  $exception
+     * @return void
+     */
+    public function failed(Throwable $exception)
+    {
+        // Send user notification of failure, etc...
+        //php artisan queue:retry all use this cmd for retry
+        Log::info($exception);
     }
 }
