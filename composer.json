@@ -10,9 +10,10 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
         "laravel/socialite": "^5.2",
-        "laravel/ui": "^3.4"
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.4",
+        "romanzipp/laravel-queue-monitor": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

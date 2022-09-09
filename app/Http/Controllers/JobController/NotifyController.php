@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class NotifyController extends Controller
 {
     public function index(){
-        NotificationJob::dispatchAfterResponse();
+        NotificationJob::dispatch()->onQueue('high-priority');
         return "job running";
     }
 }

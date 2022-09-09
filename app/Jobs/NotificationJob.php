@@ -10,25 +10,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
-use Throwable;
+use romanzipp\QueueMonitor\Traits\IsMonitored;
 
 class NotificationJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-
-    public $tries = 1;
-
-    /**
-     * The number of seconds to wait before retrying the job.
-     *
-     * @var int
-     */
+    use IsMonitored;
+    //If a job exceeds its maximum number of retry attempts, it will be considered a "failed" job
+    public $tries = 3;
+    //The number of seconds to wait before retrying the job.
     public $backoff = 3;
 
     public function __construct()
@@ -43,6 +33,8 @@ class NotificationJob implements ShouldQueue
      */
     public function handle()
     {
+        //throw new \Exception('failed');
+        //sleep(60);
         Log::info("Job is dispatch!");
     }
 
@@ -72,10 +64,9 @@ class NotificationJob implements ShouldQueue
      * @param  \Throwable  $exception
      * @return void
      */
-    public function failed(Throwable $exception)
+    public function failed($exception)
     {
-        // Send user notification of failure, etc...
-        //php artisan queue:retry all use this cmd for retry
-        Log::info($exception);
+        Log::info($exception->getMessage()); //will give you exact error in log
+        //php artisan queue:retry all //use this cmd for retry
     }
 }

@@ -7,6 +7,11 @@ use App\Http\Controllers\JobController\NotifyController;
 
 //testing jobs
 Route::get('/runjob', [NotifyController::class, 'index']);
+//jobs monitor with package
+Route::prefix('jobs')->group(function () {
+    Route::queueMonitor();
+});
+
 
 //stateless login
 Route::get('socialLogin',function (){
