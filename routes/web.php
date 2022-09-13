@@ -25,6 +25,9 @@ Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'
 Route::get('auth/google', [SocialLoginController::class, 'redirectToGoogle']);
 //Route::get('auth/{google}/callback', [SocialLoginController::class, 'handleGoogleCallback']);
 
+//testing api caching,
+Route::get('/testApiCache',[TestController::class,'testApiCache']);
+
 //testing solutions routes
 
 Route::get('/userOrderByHasMany',[TestController::class,'userOrderByHasMany']);

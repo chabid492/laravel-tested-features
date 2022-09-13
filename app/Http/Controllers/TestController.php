@@ -7,10 +7,26 @@ use App\Models\Login;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TestController extends Controller
 {
+    //testing api caching for boost speed
+    public function testApiCache(Request $request){
+        //$postCount=User::withCount('posts')->get()->toArray();
+        //lets use api caching technique of laravel
+        $postCount=Cache::remember(
+            'user.postcount'.Auth::id(),
+            now()->addSeconds(30),
+            function (){
+                return User::withCount('posts')->get()->toArray();
+        });
+        dd($postCount);
+    }
+
     //make fast order by query on has many and inverse
     //also order by last login at user
     public function userOrderByHasMany(){
