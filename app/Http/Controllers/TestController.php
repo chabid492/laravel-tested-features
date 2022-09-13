@@ -24,7 +24,8 @@ class TestController extends Controller
             function (){
                 return User::withCount('posts')->get()->toArray();
         });
-        dd($postCount);
+        //dd($postCount);
+        print_r($postCount);
     }
 
     //make fast order by query on has many and inverse
