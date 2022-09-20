@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Profila\SocialLoginController;
 use App\Http\Controllers\JobController\NotifyController;
+use App\Http\Controllers\Angular\AngularController;
 
 //testing jobs
 Route::get('/runjob', [NotifyController::class, 'index']);
@@ -12,6 +13,8 @@ Route::prefix('jobs')->group(function () {
     Route::queueMonitor();
 });
 
+//testing angular as front end app
+Route::get('angular',[AngularController::class,'angular_app_home']);
 
 //stateless login
 Route::get('socialLogin',function (){
