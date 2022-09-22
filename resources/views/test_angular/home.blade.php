@@ -1,2 +1,2 @@
 <?php
-readfile("./angular/index.html");
+readfile("../public/angular/index.html");

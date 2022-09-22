@@ -14,7 +14,7 @@ Route::prefix('jobs')->group(function () {
 });
 
 //testing angular as front end app
-Route::get('angular',[AngularController::class,'angular_app_home']);
+//Route::get('angular',[AngularController::class,'angular_app_home']);
 
 //stateless login
 Route::get('socialLogin',function (){
