@@ -35,7 +35,7 @@ class NotificationJob implements ShouldQueue
     {
         //throw new \Exception('failed');
         //sleep(60);
-        Log::info("Job is dispatch!");
+        Log::channel('abid')->info("Job is dispatch! with redis");
     }
 
     /**

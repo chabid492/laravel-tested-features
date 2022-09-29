@@ -59,6 +59,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+        'abid' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel-' . get_current_user() . '.log'),
+            'level' => 'debug',
+            'days' => 14,
+            'permission' => 0777,
+        ],
 
         'daily' => [
             'driver' => 'daily',

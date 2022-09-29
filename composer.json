@@ -13,6 +13,7 @@
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "predis/predis": "^2.0",
         "romanzipp/laravel-queue-monitor": "^2.3"
     },
     "require-dev": {
